@@ -1,0 +1,229 @@
+{% extends 'master.html' %}
+{% block head %}
+    <script type="text/javascript" src="/js/enquire.js"></script>
+    <script type="text/javascript" src="/js/jquery-2.1.3.js"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript">
+      var app_url = "/customer/{{customer}}";
+    </script>
+    <script type="text/javascript" src="/js/customer.js"> </script>
+    <title>{{ customer }} Dashboard</title>
+
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+    <link href="/css/jumbotron.css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/#">home</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <form class="navbar-form navbar-right">
+            <div class="form-group">
+              <input type="text" placeholder="Customer name..." class="form-control">
+            </div>
+            <button type="submit" class="btn btn-success">Search</button>
+          </form>
+        </div>
+      </div>
+    </nav>
+
+    <div class="jumbotron">
+      <div class="container">
+        <h1>{{ customer }}</h1>
+        <p>Boxes purchased: <span id="header_purchased">{{ purchased }}</span>; ACV: {{ "${:,.2f}".format(acv) }}</p>
+      </div>
+    </div>
+
+    <div class="container">
+      <!-- Example row of columns -->
+      <div class="row">
+        &nbsp;
+      </div>
+      <div class="row">
+        <!-- col -->
+        <div class="col-md-4">
+          <!-- widget -->
+          <div class="panel panel-default" style="height: 350px">
+            <div class="panel-body">      
+              <h3 class="text-center">Purchased Devices<img src='/images/refresh-icon.png' height="32" onclick="refresh('purchased_boxes_rolling','purchasedDevicesHistory');"></h3>
+              <h1 id="purchasedDevices" class="text-center"></h1>
+              <div id="purchasedDevicesHistory" class="chart">
+                <div class="center-block" style="width: 70">
+                  <img align="center" src='/images/loading.gif' alt='loading.gif' height='64'>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- widget -->
+          <div class="panel panel-default" style="height: 350px">
+            <div class="panel-body">      
+              <h3 class="text-center">% Provisioned<img src='/images/refresh-icon.png' height="32" onclick="getBQData('pct_provisioned_rolling');"></h3>
+              <h1 id="prov" class="text-center"></h1>
+              <div id="provHistory" class="chart">
+                <div class="center-block" style="width: 70">
+                  <img align="center" src='/images/loading.gif' alt='loading.gif' height='64'>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- widget -->
+          <div class="panel panel-default" style="height: 350px">
+            <div class="panel-body">      
+              <h3 class="text-center">Calls/Type<img src='/images/refresh-icon.png' height="32" onclick="getBQData('calls');"></h3>
+              <h1 id="cbt-placeholder" class="text-center"></h1>
+              <div id="cbt" class="chart">
+                <div class="center-block" style="width: 70">
+                  <img align="center" src='/images/loading.gif' alt='loading.gif' height='64'>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- widget -->
+          <div class="panel panel-default" style="height: 350px">
+            <div class="panel-body">      
+              <h3 class="text-center">Ratings<img src='/images/refresh-icon.png' height="32" onclick="getBQData('ratings_sliding_7');"></h3>
+              <h1 id="ratings" class="text-center"></h1>
+              <div id="ratingsHistory" class="chart">
+                <div class="center-block" style="width: 70">
+                  <img align="center" src='/images/loading.gif' alt='loading.gif' height='64'>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- col -->
+        <div class="col-md-4">
+          <!-- widget -->
+          <div class="panel panel-default" style="height: 350px">
+            <div class="panel-body">      
+              <h3 class="text-center">Registered Devices<img src='/images/refresh-icon.png' height="32" onclick="getBQData('provisioned_boxes_rolling');"></h3>
+              <h1 id="regDevices" class="text-center"></h1>
+              <div id="regDevicesHistory" class="chart">
+                <div class="center-block" style="width: 70">
+                  <img align="center" src='/images/loading.gif' alt='loading.gif' height='64'>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- widget -->
+          <div class="panel panel-default" style="height: 350px">
+            <div class="panel-body">      
+              <h3 class="text-center">7 Day Active Users<img src='/images/refresh-icon.png' height="32" onclick="getBQData('active_users_sliding_7');"></h3>
+              <h1 id="sdau" class="text-center"></h1>
+              <div id="sdauHistory" class="chart">
+                <div class="center-block" style="width: 70">
+                  <img align="center" src='/images/loading.gif' alt='loading.gif' height='64'>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- widget -->
+          <div class="panel panel-default" style="height: 350px">
+            <div class="panel-body">      
+              <h3 class="text-center">Calls/# Users</h3>
+              <h1 id="cbu-placeholder" class="text-center"></h1>
+              <div id="cbu" class="chart">
+                <div class="center-block" style="width: 70">
+                  <img align="center" src='/images/loading.gif' alt='loading.gif' height='64'>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- widget -->
+          <div class="panel panel-default" style="height: 350px">
+            <div class="panel-body">      
+              <h3 class="text-center">Dial-in sessions<img src='/images/refresh-icon.png' height="32" onclick="getBQData('dialin_sliding_7');"></h3>
+              <h1 id="dialins" class="text-center"></h1>
+              <div id="dialinsHistory" class="chart">
+                <div class="center-block" style="width: 70">
+                  <img align="center" src='/images/loading.gif' alt='loading.gif' height='64'>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      <!-- col -->
+      <div class="col-md-4">
+        <div class="panel panel-default" style="height: 350px">
+          <div class="panel-body">      
+            <h3 class="text-center">Registered Users<img src='/images/refresh-icon.png' height="32" onclick="getBQData('reg_users_rolling');"></h3>
+            <h1 id="regUsers" class="text-center"></h1>
+            <div id="regUsersHistory" class="chart">
+              <div class="center-block" style="width: 70">
+                <img align="center" src='/images/loading.gif' alt='loading.gif' height='64'>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- widget -->
+        <div class="panel panel-default" style="height: 350px">
+          <div class="panel-body">      
+            <h3 class="text-center">Calls/Week<img src='/images/refresh-icon.png' height="32" onclick="refresh('calls_sliding_7','cpwHistory');"></h3>
+            <h1 id="cpw" class="text-center"></h1>
+            <div id="cpwHistory" class="chart">
+              <div class="center-block" style="width: 70">
+                <img align="center" src='/images/loading.gif' alt='loading.gif' height='64'>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- widget -->
+        <div class="panel panel-default" style="height: 350px">
+          <div class="panel-body">      
+            <h3 class="text-center">Calls/OS</h3>
+            <h1 id="cbo-placeholder" class="text-center"></h1>
+            <div id="cbo" class="chart">
+              <div class="center-block" style="width: 70">
+                <img align="center" src='/images/loading.gif' alt='loading.gif' height='64'>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- widget -->
+        <div class="panel panel-default" style="height: 350px">
+          <div class="panel-body">      
+            <h3 class="text-center">Support tickets<img src='/images/refresh-icon.png' height="32" onclick="getBQData('support_sliding_7');"></h3>
+            <h1 id="supportTickets" class="text-center"></h1>
+            <div id="supportTicketsHistory" class="chart">
+              <div class="center-block" style="width: 70">
+                <img align="center" src='/images/loading.gif' alt='loading.gif' height='64'>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+     </div>
+      <div class="row">
+        <!-- col -->
+        <div class="col-md-12">
+          <!-- widget -->
+          <div class="panel panel-default" style="height: 350px">
+            <div class="panel-body">      
+              <h3 class="text-center">Comments<img src='/images/refresh-icon.png' height="32" onclick="getBQData('comments');"></h3>
+              <div id="comments" class="text-left" style="color:#00add7"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <hr>
+
+      <footer>
+        <p>© 2017 success-hq</p>
+      </footer>
+    </div>
+  
+{% endblock %}

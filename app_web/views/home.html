@@ -1,0 +1,108 @@
+{% extends 'master.html' %}
+{% block head %}
+    <script type="text/javascript" src="/js/enquire.js"></script>
+    <script type="text/javascript" src="/js/jquery-2.1.3.js"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <title>success-hq home</title>
+
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+    <link href="/css/jumbotron.css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/#">home</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <form class="navbar-form navbar-right">
+            <div class="form-group">
+              <input type="text" placeholder="Customer name..." class="form-control">
+            </div>
+            <button type="submit" class="btn btn-success">Search</button>
+          </form>
+        </div>
+      </div>
+    </nav>
+
+    <div class="jumbotron">
+      <div class="container">
+        <h1>Success @ betterdev.io</h1>
+        <p>"Customer success is all about smart usage that drives key outcomes" - Jeff Davis (<a href="https://twitter.com/jwd_success">@jwd_success</a>)</p>
+      </div>
+    </div>
+
+    <div class="container">
+      <!-- Example row of columns -->
+      <div class="row">
+        <div class="col-md-4">
+          <h2>Projects</h2>
+            <table class="table small">
+              {% for project in projects %}
+                <tr>
+                  <td>
+                    {{ project.due }}
+                  </td>
+                  <td>
+                    <a href="/customer/{{ project.company }}">{{ project.company }}</a>
+                  </td>
+                  <td>
+                    <a href="/projects/{{ project.id }}">{{ project.name }}</a>
+                  </td>
+                </tr>
+              {% endfor %}
+            </table>
+        </div>
+        <div class="col-md-4">
+          <h2>Renewals</h2>
+            <table class="table small">
+              {% for renewal in renewals %}
+                <tr>
+                  <td>{{ renewal.due }}
+                  </td>
+                  <td>
+                    <a href="/customer/{{ renewal.company }}">{{ renewal.company }}</a>
+                  </td>
+                  <td>
+                    <a href="/renewals/{{ renewal.id }}">{{ renewal.amount }}</a>
+                  </td>
+                </tr>
+              {% endfor %}
+            </table>
+       </div>
+        <div class="col-md-4">
+          <h2>Trending</h2>
+            <table class="table small">
+              {% for trend in trends %}
+                <tr>
+                  <td>{{ trend.date }}
+                  </td>
+                  <td>{{ trend.metric }}
+                  </td>
+                  <td> <a href="/customer/{{ trend.id }}">{{ trend.change }}%</a>
+                  </td>
+                  <td>
+                    <a href="/customer/{{ trend.company }}">{{ trend.company }}</a>
+                  </td>
+                </tr>
+              {% endfor %}
+            </table>
+        </div>
+      </div>
+
+      <hr>
+
+      <footer>
+        <p>© 2017 success-hq</p>
+      </footer>
+    </div>
+  
+{% endblock %}

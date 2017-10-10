@@ -1,0 +1,83 @@
+{% extends 'master.html' %}
+{% block head %}
+    <script type="text/javascript" src="/js/enquire.js"></script>
+    <script type="text/javascript" src="/js/jquery-2.1.3.js"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <title>Comments Deep-dive</title>
+
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+    <link href="/css/jumbotron.css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/#">home</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <form class="navbar-form navbar-right">
+            <div class="form-group">
+              <input type="text" placeholder="Customer name..." class="form-control">
+            </div>
+            <button type="submit" class="btn btn-success">Search</button>
+          </form>
+        </div>
+      </div>
+    </nav>
+
+    <div class="jumbotron">
+      <div class="container">
+        <h1>People are talking</h1>
+        <p>Do you understand what they're saying?</p>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <!-- col -->
+        <div class="col-md-12">
+          <!-- widget -->
+          <div class="panel panel-default" style="height: 850px">
+            <div class="panel-body">      
+              <h3 class="text-center">Comments<img src='/images/refresh-icon.png' height="32" onclick="getBQData('comments');"></h3>
+              <div id="comments" class="text-left" style="color:#00add7">
+                {% for comment in comments %}
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h3 class="panel-title">{{comment.original}}</h3>
+                  </div>
+                  <div class="panel-body">
+                    <div class="col-md-9">
+                      {{comment.translated}} 
+                    </div>
+                    <div class="col-md-3">
+                      <div class="alert {{ comment.alert_class }}" style="padding:6px;"> 
+                          sentiment: {{ comment.score }}; magnitude: {{ comment.magnitude }} 
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <hr>
+
+      <footer>
+        <p>© 2017 success-hq</p>
+      </footer>
+    </div>
+  
+{% endblock %}

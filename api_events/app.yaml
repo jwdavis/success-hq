@@ -1,0 +1,19 @@
+module: api-events
+runtime: python27
+api_version: 1
+threadsafe: yes
+
+handlers:
+- url: .*
+  script: api_events.app
+  secure: always
+
+libraries:
+- name: webapp2
+  version: "2.5.1"
+- name: jinja2
+  version: latest
+- name: ssl
+  version: "latest"
+- name: pycrypto
+  version: "latest"
