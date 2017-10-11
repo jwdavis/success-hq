@@ -1,4 +1,4 @@
 google-cloud==0.26.1
 googledatastore==7.0.1
 google-cloud-core==0.25.0
-google-cloud-bigquery==0.25.0
+google-cloud-bigquery==0.24.0
