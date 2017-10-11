@@ -28,8 +28,8 @@ virtualenv ~/success-hq/shq
 source ~/success-hq/shq/bin/activate
 
 # install python stuff
-pip install apache-beam[gcp]==2.0.0
-pip install -r requirements.txt -t lib
+pip install -r req-1.txt
+pip install -r req-2.txt -t lib
 
 # create app engine app
 gcloud app create --region=us-central --quiet
