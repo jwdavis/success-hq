@@ -28,8 +28,8 @@ virtualenv ~/success-hq/shq
 source ~/success-hq/shq/bin/activate
 
 # install python stuff
-pip install -r req-1.txt
-pip install -r req-2.txt -t lib
+pip install --upgrade -r req-1.txt
+pip install --upgrade -r req-2.txt -t lib
 
 # create app engine app
 gcloud app create --region=us-central --quiet
