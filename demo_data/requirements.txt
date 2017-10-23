@@ -1,2 +1,4 @@
 google-cloud-language==0.27.0
-google-cloud-bigquery==0.26.0
+google-cloud-core==0.25.0
+google-cloud-bigquery==0.24.0
+six==1.10.0
