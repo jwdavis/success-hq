@@ -15,10 +15,10 @@
 # limitations under the License.
 
 # enable apis
-gcloud service-management enable translate.googleapis.com
-gcloud service-management enable language.googleapis.com
-gcloud service-management enable dataflow.googleapis.com
-gcloud service-management enable bigquery-json.googleapis.com
+gcloud services enable translate.googleapis.com
+gcloud services enable language.googleapis.com
+gcloud services enable dataflow.googleapis.com
+gcloud services enable bigquery-json.googleapis.com
 
 # create dataflow bucket
 gsutil mb gs://$DEVSHELL_PROJECT_ID-df
