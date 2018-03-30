@@ -116,7 +116,7 @@ def run():
     '--staging_location=gs://{0}/staging/'.format(BUCKET),
     '--temp_location=gs://{0}/staging/'.format(BUCKET),
     '--temp_location=gs://{0}/staging/'.format(BUCKET),
-    '--runner=DataflowRunner'
+    '--runner=DataflowRunner',
   ]
 
   # create the pipeline
