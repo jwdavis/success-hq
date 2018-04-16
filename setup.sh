@@ -28,6 +28,7 @@ virtualenv ~/success-hq/shq
 source ~/success-hq/shq/bin/activate
 
 # install python stuff
+pip install --upgrade pip==9.0.1
 pip install --upgrade -r req-1.txt
 pip install --upgrade -r req-2.txt -t lib
 
