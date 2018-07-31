@@ -24,7 +24,7 @@ gcloud services enable bigquery-json.googleapis.com
 gsutil mb gs://$DEVSHELL_PROJECT_ID-df
 
 # create virtual environment
-virtualenv ~/success-hq/shq
+virtualenv  --python=/usr/bin/python ~/success-hq/shq
 source ~/success-hq/shq/bin/activate
 
 # install python stuff
