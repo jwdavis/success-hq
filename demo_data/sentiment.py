@@ -74,7 +74,7 @@ def get_stats(sentiment_tuple):
 
 def get_sentiment(comment_tuple):
   language_client = language.Client()
-  comments = comment_tuple[1] 
+  comments = comment_tuple[1]
   document = language_client.document_from_text(comments)
   annotations = document.annotate_text(include_syntax=False, include_entities=False, include_sentiment=True)
 
@@ -124,7 +124,7 @@ def run():
 
   schema = 'date:DATE,company:STRING,num_comments:INTEGER,num_positive:INTEGER,num_neutral:INTEGER,num_negative:INTEGER'
 
-  bq_rows = (p 
+  bq_rows = (p
     | 'read comments from BQ' >> beam.io.Read(beam.io.BigQuerySource(query=query,use_standard_sql=True))
     | 'make comment tuples' >> beam.Map(comment_tuple)
     | 'group comments by company' >> beam.GroupByKey()
