@@ -96,7 +96,7 @@ def build_ticket_events(user):
   seconds = (datetime.now() - user['reg_date']).total_seconds()
   days_since_reg = int(seconds / 86400)
   troubley = randint(0,3)
-  tickets = int(days_since_reg / (4 - troubley) / 5) # change last for adjust ticket numbers
+  tickets = int(days_since_reg / (4 - troubley) / 2) # change last for adjust ticket numbers
 
   for ticket in range(0,tickets):
     event_date = user['reg_date'] + timedelta(0,int(seconds/tickets/1.1) * ticket)
@@ -139,7 +139,7 @@ def build_call_events(user):
   days_since_reg = int(seconds / 86400)
   freq = randint(1,10)
 
-  calls = int (days_since_reg / (11-freq) * 4 ) # change last for adjust call numbers - default 4
+  calls = int (days_since_reg / (11-freq) * 10 ) # change last for adjust call numbers - default 4
 
   happy = randint(0,2)
   ratey = randint(0,2)
