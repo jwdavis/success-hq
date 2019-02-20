@@ -15,13 +15,13 @@
 # limitations under the License.
 
 # enable apis
-# gcloud services enable translate.googleapis.com
-# gcloud services enable language.googleapis.com
-# gcloud services enable dataflow.googleapis.com
-# gcloud services enable bigquery-json.googleapis.com
+gcloud services enable translate.googleapis.com
+gcloud services enable language.googleapis.com
+gcloud services enable dataflow.googleapis.com
+gcloud services enable bigquery-json.googleapis.com
 
 # create dataflow bucket
-# gsutil mb gs://$DEVSHELL_PROJECT_ID-df
+gsutil mb gs://$DEVSHELL_PROJECT_ID-df
 
 # create virtual environment
 virtualenv  --python=/usr/bin/python ~/success-hq/shq
@@ -32,13 +32,17 @@ pip install --upgrade pip==9.0.1
 pip install --upgrade -r req-1.txt
 pip install --upgrade -r req-2.txt -t lib
 
+# fix protobuf problem in cloud shell
+pip uninstall protobuf
+pip install protobuf
+
 # create app engine app
-# gcloud app create --region=us-central --quiet
-# gcloud app deploy app_web/app.yaml api_events/app.yaml queue.yaml index.yaml --quiet
+gcloud app create --region=us-central --quiet
+gcloud app deploy app_web/app.yaml api_events/app.yaml queue.yaml index.yaml --quiet
 
 # run dataflow jobs
 cd demo_data
-# curl https://$DEVSHELL_PROJECT_ID.appspot.com/setup?what=setup_bq
+curl https://$DEVSHELL_PROJECT_ID.appspot.com/setup?what=setup_bq
 python datastore_pipeline.py
 python sentiment.py
 
