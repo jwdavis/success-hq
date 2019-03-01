@@ -33,8 +33,8 @@ pip install --upgrade -r req-1.txt
 pip install --upgrade -r req-2.txt -t lib
 
 # fix protobuf problem in cloud shell
-pip uninstall protobuf
-pip install protobuf
+pip uninstall protobuf -q
+pip install protobuf -q
 
 # create app engine app
 gcloud app create --region=us-central --quiet
