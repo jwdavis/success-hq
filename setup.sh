@@ -27,7 +27,7 @@ gsutil mb gs://$DEVSHELL_PROJECT_ID-df
 
 # create virtual environment
 echo "Creating Virtual Environment..."
-virtualenv  --python=/usr/bin/python ~/success-hq/shq
+virtualenv  ~/success-hq/shq
 source ~/success-hq/shq/bin/activate
 
 # install python stuff
