@@ -33,7 +33,7 @@ pip install --upgrade -r req-1.txt
 pip install --upgrade -r req-2.txt -t lib
 
 # fix protobuf problem in cloud shell
-pip uninstall protobuf -q
+pip uninstall protobuf -y
 pip install protobuf -q
 
 # create app engine app
