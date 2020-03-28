@@ -48,7 +48,7 @@ class show(utils.BaseHandler):
         for comment in sample_comments:
 
             # determine language and translate
-            language = translate_client.detect_language(comment)['language']
+            translate_client = translate.Client()
             tranlastion_result = translate_client.translate(comment,target_language='en')
             translated_comment = tranlastion_result['translatedText']
 
@@ -70,9 +70,9 @@ class show(utils.BaseHandler):
 
             # construct output data
             output.append({
-                "original": comment.encode('ascii','xmlcharrefreplace'), 
-                "translated": translated_comment.encode('ascii','xmlcharrefreplace'), 
-                "score": score, 
+                "original": comment.encode('ascii','xmlcharrefreplace'),
+                "translated": translated_comment.encode('ascii','xmlcharrefreplace'),
+                "score": score,
                 "magnitude": magnitude,
                 "alert_class": alert_class
                 })
