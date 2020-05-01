@@ -33,7 +33,7 @@ sample_comments = [
     u"This was terrific. I hated it.",
     u"C'était bien. L'audio était un peu grinçant.",
     u"Me decepcionó que no hay soporte para Linux.",
-    u"高超！",
+    u"超棒",
     u"Jambo hili ni jambo la kushangaza! Ilikuwa ni kama mimi nilikuwa huko."
 ]
 
