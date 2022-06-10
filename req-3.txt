@@ -1,0 +1,7 @@
+apache-beam[gcp]
+httplib2
+google-cloud-language
+google-cloud-core
+google-cloud
+google-cloud-bigquery
+googledatastore
